@@ -1,15 +1,15 @@
 [user]
-	name = Todd Gamblin
-	email = tgamblin@llnl.gov
+	name = Alfredo Gimenez
+	email = gimenez1@llnl.gov
 
-[merge]
-	tool = opendiff
+# [merge]
+# 	tool = opendiff
 
 [color]
 	ui = auto
 
-[core]
-	excludesfile = /Users/gamblin2/.gitignore_global
+# [core]
+#     excludesfile = /Users/gamblin2/.gitignore_global
 
 [alias]
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
@@ -21,19 +21,19 @@
     br = branch
     unadd = reset HEAD
 
-[push]
-	default = simple
-
 [credential]
 	helper = cache --timeout=43200
 
 [http]
 	postBuffer = 524288000
 
-[difftool]
-	prompt = false
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+# [difftool]
+# 	prompt = false
+# 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+# 
+# [mergetool "sourcetree"]
+# 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+# 	trustExitCode = true
 
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+[push]
+	default = simple

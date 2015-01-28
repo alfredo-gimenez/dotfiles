@@ -1,6 +1,6 @@
 dotfiles
 =====================================
-by Todd Gamblin, tgamblin@llnl.gov
+Modified from http://github.com/tgamblin/dotfiles.git
 
 This repo contains tools to help you keep your home directory
 synchronized across machines.
