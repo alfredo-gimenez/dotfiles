@@ -122,7 +122,7 @@ export HISTCONTROL=ignoreboth    # don't save duplicate entries
 export HISTSIZE=10000
 
 # Default editor (see below for TextMate extras)
-export EDITOR="emacs -nw"
+export EDITOR="vim"
 
 # Macports setup is only done on Darwin.
 if [ "$OS" = 'Darwin' ]; then
@@ -190,7 +190,7 @@ pathadd .
 # Unneeded if everyone uses pathadd
 #clean_path
 
-# Use TextMate if we're in a GUI session and it exists, otherwise emacs.
+# Use TextMate if we're in a GUI session and it exists, otherwise vim
 # Do editor setup after path setup as it depends on the PATH
 use_textmate=false
 if [ "$Apple_PubSub_Socket_Render" != "" -a "$use_textmate" = "true" ]; then
