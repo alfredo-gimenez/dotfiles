@@ -16,6 +16,10 @@ To get started there are three easy steps:
 
 Now your dotfiles are in a git repo and you can clone them anywhere and keep them synchronized.
 
+If you want vim plugins through vundle, there are two more:
+1. Initialize the vundle submodule with `git submodule update --init --recursive` from the repo directory.
+2. Open vim and type `:PluginInstall`
+
 Setup
 -------------------------------------
 Fork this repo and put your dotfiles in it:
