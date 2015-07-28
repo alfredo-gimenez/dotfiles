@@ -199,3 +199,18 @@ if [ "$Apple_PubSub_Socket_Render" != "" -a "$use_textmate" = "true" ]; then
         export EDITOR="mate -w"
     fi
 fi
+
+# export HADOOP_HOME=/usr/local/hadoop-bigfoot-build
+# export HADOOP_MAPRED_HOME=$HADOOP_HOME
+# export HADOOP_COMMON_HOME=$HADOOP_HOME
+# export HADOOP_HDFS_HOME=$HADOOP_HOME
+# export YARN_HOME=$HADOOP_HOME
+# export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
+# export HADOOP_INSTALL=$HADOOP_HOME
+# 
+# pathadd $HADOOP_HOME/sbin
+# pathadd $HADOOP_HOME/bin
+
+# TODO: add hadoop home here
+# export CLASSPATH = $CLASSPATH:/home/hadoop/hbase/lib/*
+

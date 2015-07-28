@@ -1,7 +1,7 @@
 set nocompatible               " be iMproved
 filetype off                   " required!
 
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vundle/Vundle.vim
 call vundle#rc()
 
 " let Vundle manage Vundle

@@ -173,9 +173,14 @@
 
 ;; c hook -- sets tabs
 (defun my-c-mode-common-hook ()
-  (setq-default standard-indent 2)
-  (setq tab-width 2)
-  (setq c-basic-offset 2)
+  (setq-default standard-indent 4)
+  (setq tab-width 4)
+  (setq c-basic-offset 4)
+
+;  (setq-default standard-indent 2)
+;  (setq tab-width 2)
+;  (setq c-basic-offset 2)
+
   (set-fill-column 78)
   (c-set-offset 'innamespace 0))
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)

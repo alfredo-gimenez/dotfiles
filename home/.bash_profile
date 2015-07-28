@@ -1,4 +1,3 @@
-# just use .bashrc
-if [ -f ~/.bashrc ]; then
-	. ~/.bashrc
-fi
+spack use zsh
+export SHELL=`which zsh`
+exec /bin/zsh -l
