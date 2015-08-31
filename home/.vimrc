@@ -1,31 +1,27 @@
 set nocompatible               " be iMproved
 filetype off                   " required!
 
-set rtp+=~/.vundle/Vundle.vim
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 " let Vundle manage Vundle
 " required! 
-Bundle 'gmarik/vundle'
+Bundle 'VundleVim/Vundle.vim.git'
 
-" My Bundles here:
-"
-" original repos on github
-" Bundle 'Lokaltog/vim-easymotion'
-" Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+" github bundles
+Bundle 'powerline/powerline'
+Bundle 'altercation/vim-colors-solarized'
 Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-sensible.git'
-Bundle 'scrooloose/nerdtree.git'
-Bundle 'scrooloose/syntastic.git'
-Bundle 'altercation/vim-colors-solarized.git'
-" Bundle 'kien/ctrlp.vim.git'
+Bundle 'tpope/vim-sensible'
+Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/syntastic'
 Bundle 'Valloric/YouCompleteMe'
-" vim-scripts repos
+" Bundle 'kien/ctrlp.vim'
 " Bundle 'L9'
 " Bundle 'FuzzyFinder'
 Bundle 'klen/python-mode'
-" Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Bundle 'davidhalter/jedi-vim'
+
 " non github repos
 " Bundle 'git://git.wincent.com/command-t.git'
 " ...
@@ -41,7 +37,10 @@ filetype plugin indent on     " required!
 " see :h vundle for more details or wiki for FAQ
 " NOTE: comments after Bundle command are not allowed..
 
+call vundle#end()
+
 " Colors
+syntax enable
 set background=dark
 colorscheme solarized
 
@@ -57,6 +56,9 @@ set number
 " Case searching ignore+smart
 set ignorecase
 set smartcase
+
+" Mouse (non-gui mode)
+set mouse=a
 
 " Auto-load global ycm conf file [YouCompleteMe]
 let g:ycm_confirm_extra_conf = 0
