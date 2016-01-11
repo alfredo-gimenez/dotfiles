@@ -124,18 +124,6 @@ export HISTSIZE=10000
 # Default editor (see below for TextMate extras)
 export EDITOR="vim"
 
-# Macports setup is only done on Darwin.
-if [ "$OS" = 'Darwin' ]; then
-    #export MACPORTS_HOME=/opt/local
-    export MACPORTS_HOME=$HOME/macports
-    if [ -f $MACPORTS_HOME/share/macports/setupenv.bash ]; then
-        . $MACPORTS_HOME/share/macports/setupenv.bash
-    fi
-
-    # put GNU coreutils in path ahead of BSD tools
-    pathadd $MACPORTS_HOME/libexec/gnubin
-fi
-
 # Get ls set up with some decent colors.
 if ls --color -d . >/dev/null 2>&1; then
     export LS_OPTIONS="--color=auto -F -B"
@@ -155,7 +143,6 @@ if [ -e "$(which dircolors)" ]; then
     fi
 fi
 
-
 # Likewise for grep
 export GREP_OPTIONS=--color=auto
 
@@ -171,7 +158,6 @@ alias f='finger'
 alias more='less'
 alias screen='screen -R -D'
 
-
 # Init other config files as necessary.  File should be put in ~/.bash.d,
 # and can be disabled by putting a ~ anywhere in the name.
 extra_scripts=$HOME/.bash.d/*
@@ -186,31 +172,4 @@ fi
 pathadd /usr/sbin
 pathadd $HOME/bin
 pathadd .
-
-# Unneeded if everyone uses pathadd
-#clean_path
-
-# Use TextMate if we're in a GUI session and it exists, otherwise vim
-# Do editor setup after path setup as it depends on the PATH
-use_textmate=false
-if [ "$Apple_PubSub_Socket_Render" != "" -a "$use_textmate" = "true" ]; then
-    mate=$(which mate 2>/dev/null)
-    if [ ! -z "$mate" ]; then
-        export EDITOR="mate -w"
-    fi
-fi
-
-# export HADOOP_HOME=/usr/local/hadoop-bigfoot-build
-# export HADOOP_MAPRED_HOME=$HADOOP_HOME
-# export HADOOP_COMMON_HOME=$HADOOP_HOME
-# export HADOOP_HDFS_HOME=$HADOOP_HOME
-# export YARN_HOME=$HADOOP_HOME
-# export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
-# export HADOOP_INSTALL=$HADOOP_HOME
-# 
-# pathadd $HADOOP_HOME/sbin
-# pathadd $HADOOP_HOME/bin
-
-# TODO: add hadoop home here
-# export CLASSPATH = $CLASSPATH:/home/hadoop/hbase/lib/*
 

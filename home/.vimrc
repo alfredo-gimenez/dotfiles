@@ -60,6 +60,9 @@ set smartcase
 " Mouse (non-gui mode)
 set mouse=a
 
+" Replace word under cursor using \s
+nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
+
 " Auto-load global ycm conf file [YouCompleteMe]
 let g:ycm_confirm_extra_conf = 0
 au FileType cc,cpp,hpp let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf_cpp.py'
@@ -178,3 +181,7 @@ let g:pymode_syntax_space_errors = g:pymode_syntax_all
 
 " Don't autofold code
 let g:pymode_folding = 0
+
+" Don't pep8 my line lengths!
+let g:pymode_options_max_line_length=120
+let g:syntastic_python_pylint_post_args="--max-line-length=120"
