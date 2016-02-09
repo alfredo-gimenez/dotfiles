@@ -1,7 +1,7 @@
 set nocompatible               " be iMproved
 filetype off                   " required!
 
-set rtp+=~/.vundle/Vundle.vim
+set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 
 " let Vundle manage Vundle
@@ -15,9 +15,11 @@ Bundle 'gmarik/vundle'
 " Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-sensible.git'
+Bundle 'bling/vim-airline.git'
 Bundle 'scrooloose/nerdtree.git'
 Bundle 'scrooloose/syntastic.git'
 Bundle 'altercation/vim-colors-solarized.git'
+Bundle 'chrisbra/csv.vim'
 " Bundle 'kien/ctrlp.vim.git'
 Bundle 'Valloric/YouCompleteMe'
 " vim-scripts repos
@@ -155,9 +157,10 @@ let g:pymode_rope = 0 " Jedi-Vim
 let g:pymode_doc = 1
 let g:pymode_doc_key = 'K'
 
-"Linting
+" Linting
 let g:pymode_lint = 1
 let g:pymode_lint_checker = "pyflakes,pep8"
+
 " Auto check on save
 let g:pymode_lint_write = 1
 
@@ -168,7 +171,7 @@ let g:pymode_virtualenv = 1
 let g:pymode_breakpoint = 1
 let g:pymode_breakpoint_bind = '<leader>b'
 
-" syntax highlighting
+" Syntax Highlighting
 let g:pymode_syntax = 1
 let g:pymode_syntax_all = 1
 let g:pymode_syntax_indent_errors = g:pymode_syntax_all
@@ -176,3 +179,16 @@ let g:pymode_syntax_space_errors = g:pymode_syntax_all
 
 " Don't autofold code
 let g:pymode_folding = 0
+
+" Not everything in pep8 is pep-great
+let g:pep8_ignore="E501,W601"
+let g:syntastic_python_flake8_args="--ignore=E501,W601"
+let g:pymode_options_max_line_length=120
+autocmd FileType python set colorcolumn=120
+
+" No X11
+if has("gui_running")
+else 
+    colorscheme desert
+    set mouse=a
+endif

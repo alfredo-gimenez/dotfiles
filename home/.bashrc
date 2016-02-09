@@ -155,7 +155,6 @@ if [ -e "$(which dircolors)" ]; then
     fi
 fi
 
-
 # Likewise for grep
 export GREP_OPTIONS=--color=auto
 
@@ -170,7 +169,6 @@ alias rb="rm -f *~ .*~ \#* .\#*"
 alias f='finger'
 alias more='less'
 alias screen='screen -R -D'
-
 
 # Init other config files as necessary.  File should be put in ~/.bash.d,
 # and can be disabled by putting a ~ anywhere in the name.
@@ -187,30 +185,10 @@ pathadd /usr/sbin
 pathadd $HOME/bin
 pathadd .
 
-# Unneeded if everyone uses pathadd
-#clean_path
+# Add anaconda
+pathadd /g/g22/gimenez1/anaconda2/bin
 
-# Use TextMate if we're in a GUI session and it exists, otherwise vim
-# Do editor setup after path setup as it depends on the PATH
-use_textmate=false
-if [ "$Apple_PubSub_Socket_Render" != "" -a "$use_textmate" = "true" ]; then
-    mate=$(which mate 2>/dev/null)
-    if [ ! -z "$mate" ]; then
-        export EDITOR="mate -w"
-    fi
+if [ -e $HOME/src/spack ]; then
+    export SPACK_HOME="$HOME/src/spack/"
+    . $SPACK_HOME/share/spack/setup-env.sh
 fi
-
-# export HADOOP_HOME=/usr/local/hadoop-bigfoot-build
-# export HADOOP_MAPRED_HOME=$HADOOP_HOME
-# export HADOOP_COMMON_HOME=$HADOOP_HOME
-# export HADOOP_HDFS_HOME=$HADOOP_HOME
-# export YARN_HOME=$HADOOP_HOME
-# export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
-# export HADOOP_INSTALL=$HADOOP_HOME
-# 
-# pathadd $HADOOP_HOME/sbin
-# pathadd $HADOOP_HOME/bin
-
-# TODO: add hadoop home here
-# export CLASSPATH = $CLASSPATH:/home/hadoop/hbase/lib/*
-
