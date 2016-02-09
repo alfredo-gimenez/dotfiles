@@ -170,6 +170,7 @@ if [ "$extra_scripts" != "$HOME/.bash.d/\*" ]; then
 fi
 
 pathadd /usr/sbin
-pathadd $HOME/bin
-pathadd .
 
+if [ -e /Library/TeX/texbin ]; then
+    pathadd /Library/TeX/texbin
+fi
