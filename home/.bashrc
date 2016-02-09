@@ -124,18 +124,6 @@ export HISTSIZE=10000
 # Default editor (see below for TextMate extras)
 export EDITOR="vim"
 
-# Macports setup is only done on Darwin.
-if [ "$OS" = 'Darwin' ]; then
-    #export MACPORTS_HOME=/opt/local
-    export MACPORTS_HOME=$HOME/macports
-    if [ -f $MACPORTS_HOME/share/macports/setupenv.bash ]; then
-        . $MACPORTS_HOME/share/macports/setupenv.bash
-    fi
-
-    # put GNU coreutils in path ahead of BSD tools
-    pathadd $MACPORTS_HOME/libexec/gnubin
-fi
-
 # Get ls set up with some decent colors.
 if ls --color -d . >/dev/null 2>&1; then
     export LS_OPTIONS="--color=auto -F -B"
@@ -186,8 +174,11 @@ pathadd $HOME/bin
 pathadd .
 
 # Add anaconda
-pathadd /g/g22/gimenez1/anaconda2/bin
+if [ -e $HOME/anaconda ]; then
+    pathadd $HOME/anaconda2/bin
+fi
 
+# Initialize spack
 if [ -e $HOME/src/spack ]; then
     export SPACK_HOME="$HOME/src/spack/"
     . $SPACK_HOME/share/spack/setup-env.sh

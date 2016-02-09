@@ -6,13 +6,11 @@ call vundle#rc()
 
 " let Vundle manage Vundle
 " required! 
-Bundle 'gmarik/vundle'
+Bundle 'VundleVim/Vundle.vim.git'
 
-" My Bundles here:
-"
-" original repos on github
-" Bundle 'Lokaltog/vim-easymotion'
-" Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+" github bundles
+Bundle 'powerline/powerline'
+Bundle 'altercation/vim-colors-solarized'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-sensible.git'
 Bundle 'bling/vim-airline.git'
@@ -22,12 +20,12 @@ Bundle 'altercation/vim-colors-solarized.git'
 Bundle 'chrisbra/csv.vim'
 " Bundle 'kien/ctrlp.vim.git'
 Bundle 'Valloric/YouCompleteMe'
-" vim-scripts repos
+" Bundle 'kien/ctrlp.vim'
 " Bundle 'L9'
 " Bundle 'FuzzyFinder'
 Bundle 'klen/python-mode'
-" Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Bundle 'davidhalter/jedi-vim'
+
 " non github repos
 " Bundle 'git://git.wincent.com/command-t.git'
 " ...
@@ -43,7 +41,10 @@ filetype plugin indent on     " required!
 " see :h vundle for more details or wiki for FAQ
 " NOTE: comments after Bundle command are not allowed..
 
+call vundle#end()
+
 " Colors
+syntax enable
 set background=dark
 colorscheme solarized
 
@@ -59,6 +60,12 @@ set number
 " Case searching ignore+smart
 set ignorecase
 set smartcase
+
+" Mouse (non-gui mode)
+set mouse=a
+
+" Replace word under cursor using \s
+nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 
 " Auto-load global ycm conf file [YouCompleteMe]
 let g:ycm_confirm_extra_conf = 0
@@ -180,15 +187,14 @@ let g:pymode_syntax_space_errors = g:pymode_syntax_all
 " Don't autofold code
 let g:pymode_folding = 0
 
-" Not everything in pep8 is pep-great
+" Pep8 line width up to 120, ignore "function too complex"
 let g:pep8_ignore="E501,W601"
 let g:syntastic_python_flake8_args="--ignore=E501,W601"
 let g:pymode_options_max_line_length=120
 autocmd FileType python set colorcolumn=120
 
-" No X11
+" No X11, use mouse
 if has("gui_running")
 else 
-    colorscheme desert
     set mouse=a
 endif
