@@ -171,16 +171,18 @@ fi
 
 pathadd /usr/sbin
 
-if [ -e /Library/TeX/texbin ]; then
+# Add TeX
+if [ -f /Library/TeX/texbin ]; then
     pathadd /Library/TeX/texbin
+fi
 
 # Add anaconda
-if [ -e $HOME/anaconda ]; then
+if [ -d $HOME/anaconda2 ]; then
     pathadd $HOME/anaconda2/bin
 fi
 
 # Initialize spack
-if [ -e $HOME/src/spack ]; then
+if [ -d $HOME/src/spack ]; then
     export SPACK_HOME="$HOME/src/spack/"
     . $SPACK_HOME/share/spack/setup-env.sh
 fi
