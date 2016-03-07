@@ -1,50 +1,26 @@
 #!/bin/bash
 
-CURRENT_SECTION="INVALID"
+# MACHINE=${HOSTNAME//[[:digit:]]/}
 
-# begin/end section ========================================
+# utility functions ========================================
 
-function begin_section {
-    CURRENT_SECTION=$1
-    echo "Executing $CURRENT_SECTION..."
+function dbg-cmd {
+    echo "\$ $@"
+    $@
+    return $?
 }
 
-function end_section {
-    if [ $? -eq 0 ]; then
-        echo "$CURRENT_SECTION SUCCESS"
-    else
-        echo "$CURRENT_SECTION FAILURE"
-    fi
-
-    echo
-
-    CURRENT_SECTION="INVALID"
-}
-
-# command-exists ===========================================
-
-function command-exists {
+function cmd-exists {
     command -v "$1" >/dev/null 2>&1
 }
 
 # use/load abstraction ======================================
 
-function choose {
-    if command-exists use; then
-        use $@
-    elif command-exists module; then
-        module load $@
-    else
-        echo "No way to choose!"
-        return 1
-    fi
-}
-
 function spoose {
-    if command-exists use; then
-        spack use $@
-    elif command-exists module; then
-        spack load $@
+    if cmd-exists use; then
+        dbg-cmd spack use $@
+    elif cmd-exists module; then
+        dbg-cmd spack load $@
     else
         echo "No way to spoose!"
         return 1
@@ -53,69 +29,64 @@ function spoose {
 
 # setup ====================================================
 
-function setup-general {
+function setup-basic-tools {
     spoose git
     spoose vim
     spoose cmake
 }
 
-function setup-spark {
-    begin_section "Spark setup"
-    export SPARK_HOME=/usr/global/tools/lcmon/spark_1_5_1/
-    . $SPARK_HOME/conf/spark-env.sh
-    end_section 
-}
-
-function setup-bigfoot {
-    begin_section "Bigfoot development environment setup"
-    export SPACK_HOME=$HOME/src/spack/
-    export MODULEPATH=$SPACK_HOME/share/spack/modules/chaos_5_x86_64_ib:/$MODULEPATH
-    spack load git
-    spack load vim
-    spack load cmake
-    end_section
-}
-
-function setup-scrubjay-env {
-    begin_section "ScrubJay development environment setup"
-    export PATH=$HOME/anaconda2/bin:$PATH
-    source activate scrubjay
-    end_section
-}
-
-function setup-caliper-env {
-    begin_section "Caliper development environment setup"
-    if command-exists use; then
-        use gcc-4.9.2p
-    elif command-exists module; then
-        module load gnu/4.9.2
+function setup-spack {
+    if [ "$#" -ne 1 ]; then
+        echo "Usage $0 <spack directory>"
+        return 1
     fi
-    end_section
+
+    dbg-cmd export SPACK_HOME=$1
+    dbg-cmd . $SPACK_HOME/share/spack/setup-env.sh
+
+    # sometimes we need to do modulepath manually
+    dbg-cmd export MODULEPATH=$SPACK_HOME/share/spack/modules/chaos_5_x86_64_ib:/$MODULEPATH
+}
+
+function setup-spark {
+    if [ "$#" -ne 1 ]; then
+        echo "Usage $0 <spark directory>"
+        return 1
+    fi
+
+    dbg-cmd export SPARK_HOME=$1
+    dbg-cmd . $SPARK_HOME/conf/spark-env.sh
+}
+
+function setup-anaconda {
+    if [ "$#" -ne 1 ]; then
+        echo "Usage $0 <anaconda directory>"
+        return 1
+    fi
+
+    dbg-cmd export ANACONDA_HOME=$1
+    dbg-cmd pathadd $ANACONDA_HOME/bin
 }
 
 # workon ====================================================
 
-function hostname-stripped {
-    ${HOSTNAME//[[:digit:]]/}
-}
-
 function workon-scrubjay {
-    setup-scrubjay-env
-    setup-spark
+    setup-spark /usr/global/tools/lcmon/spark_1_6_0/
+    dbg-cmd source activate scrubjay
 }
 
 function workon-caliper {
-    setup-caliper-env
+    if cmd-exists use; then
+        dbg-cmd use gcc-4.9.2p
+    elif cmd-exists module; then
+        dbg-cmd module load gnu/4.9.2
+    fi
 }
 
 function workon {
-    # Machine-specific setup
-    MACHINE=${HOSTNAME//[[:digit:]]/}
-    if [ "$MACHINE" == "cab" ]; then
-        setup-general
-    elif [ "$MACHINE" == "bigfoot" ]; then
-        setup-bigfoot
-    fi
+    # General setup
+    setup-spack $HOME/src/spack
+    setup-basic-tools
 
     # Check if a project was specified
     if [ "$#" -ne 1 ]; then
@@ -123,12 +94,13 @@ function workon {
     fi
 
     # Project-specific setup
-    if [ "$1" == "scrubjay" ]; then
+    PROJECT=$1
+    if [ "$PROJECT" == "scrubjay" ]; then
         workon-scrubjay
-    elif [ "$1" == "caliper" ]; then
+    elif [ "$PROJECT" == "caliper" ]; then
         workon-caliper
     else
-        echo "Project $1 not found!"
+        echo "Project $PROJECT not found!"
         return 1
     fi
 

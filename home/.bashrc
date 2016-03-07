@@ -180,9 +180,3 @@ fi
 if [ -d $HOME/anaconda2 ]; then
     pathadd $HOME/anaconda2/bin
 fi
-
-# Initialize spack
-if [ -d $HOME/src/spack ]; then
-    export SPACK_HOME="$HOME/src/spack/"
-    . $SPACK_HOME/share/spack/setup-env.sh
-fi

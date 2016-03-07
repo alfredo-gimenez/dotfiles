@@ -187,8 +187,8 @@ let g:pymode_syntax_space_errors = g:pymode_syntax_all
 let g:pymode_folding = 0
 
 " Pep8 line width up to 120, ignore "function too complex"
-let g:pep8_ignore="E501,W601"
-let g:syntastic_python_flake8_args="--ignore=E501,W601"
+let g:pep8_ignore="E501,W601,W0612"
+let g:syntastic_python_flake8_args="--ignore=E501,W601,W0612"
 let g:pymode_options_max_line_length=120
 autocmd FileType python set colorcolumn=120
 
