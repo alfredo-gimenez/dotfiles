@@ -52,7 +52,7 @@ function setup-spack {
     dbg-cmd . $SPACK_HOME/share/spack/setup-env.sh
 
     # sometimes we need to do modulepath manually
-    dbg-cmd export MODULEPATH=$SPACK_HOME/share/spack/modules/chaos_5_x86_64_ib:/$MODULEPATH
+    # dbg-cmd export MODULEPATH=$SPACK_HOME/share/spack/modules/chaos_5_x86_64_ib:/$MODULEPATH
 }
 
 function setup-spark {
