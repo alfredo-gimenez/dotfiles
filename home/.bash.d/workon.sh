@@ -14,6 +14,13 @@ function cmd-exists {
     command -v "$1" >/dev/null 2>&1
 }
 
+# bash tab completion ======================================
+
+function workon-completion {
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    COMPREPLY=( $(compgen -W "scrubjay caliper" -- ${cur}) )
+}
+
 # use/load abstraction ======================================
 
 function spoose {
@@ -45,7 +52,7 @@ function setup-spack {
     dbg-cmd . $SPACK_HOME/share/spack/setup-env.sh
 
     # sometimes we need to do modulepath manually
-    dbg-cmd export MODULEPATH=$SPACK_HOME/share/spack/modules/chaos_5_x86_64_ib:/$MODULEPATH
+    # dbg-cmd export MODULEPATH=$SPACK_HOME/share/spack/modules/chaos_5_x86_64_ib:/$MODULEPATH
 }
 
 function setup-spark {
@@ -106,3 +113,6 @@ function workon {
 
     return 0
 }
+
+# Use bash completion
+complete -F workon-completion workon
